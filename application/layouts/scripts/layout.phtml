@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+    <head>
+        <title></title>
+        <meta charset="UTF-8" />
+        <?php echo $this->headScript()->appendFile($this->baseUrl().'/js/jquery.js'); ?>
+    </head>
+
+    <body>
+        
+        <!-- komunikaty -->
+        <?php
+        /* @var $flashMessenger Zend_Controller_Action_Helper_FlashMessenger */
+        $flashMessenger = Zend_Controller_Action_HelperBroker::getStaticHelper('flashMessenger');
+        if ($flashMessenger->hasCurrentMessages()) {
+            $message = $flashMessenger->getCurrentMessages();
+            $flashMessenger->clearCurrentMessages();
+        } else {
+            $message = $flashMessenger->getMessages();
+        }
+        ?>
+        <?php foreach ($message as $m): ?>
+            <p style="color: red;">KOMUNIKAT: <?php echo $m ?></p>
+        <?php endforeach ?>
+        
+        <!-- layout -->
+        <?php echo $this->layout()->content; ?>
+        
+    </body>
+
+</html>
