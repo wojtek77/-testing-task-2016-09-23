@@ -10,5 +10,13 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
         ));
         $resourceLoader->addResourceType('my', 'my/', 'my');
     }
+
+    protected function _initDatabase()
+    {
+        $resource = $this->getPluginResource('db');
+        $db = $resource->getDbAdapter();
+        Zend_Db_Table::setDefaultAdapter($db);
+        Zend_Registry::set('db', $db);
+    }
 }
     
